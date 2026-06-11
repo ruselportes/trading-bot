@@ -1,0 +1,33 @@
+{
+  "name": "@trading-bot/backend",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc && node --watch dist/index.js",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@trading-bot/shared": "*",
+    "express": "^4.18.0",
+    "cors": "^2.8.5",
+    "ws": "^8.16.0",
+    "node-fetch": "^2.7.0",
+    "crypto-js": "^4.2.0",
+    "uuid": "^9.0.0",
+    "dotenv": "^16.4.0",
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/ws": "^8.5.10",
+    "@types/node-fetch": "^2.6.11",
+    "@types/crypto-js": "^4.2.2",
+    "@types/uuid": "^9.0.7",
+    "@types/node": "^20.11.0"
+  }
+}

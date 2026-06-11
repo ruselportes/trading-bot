@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "Trading Bot",
+    "slug": "trading-bot",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "trading-bot",
+    "platforms": ["ios", "android"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.tradingbot.app"
+    },
+    "android": {
+      "package": "com.tradingbot.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#0f0f23"
+      }
+    }
+  }
+}
