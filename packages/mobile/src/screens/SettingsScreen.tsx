@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native'
 import { useBotStore } from '../store/bot'
-import { useAuthStore } from '../store/auth'
 import { api } from '../lib/api'
 import type { TradingMode } from '@trading-bot/shared'
 
@@ -15,7 +14,6 @@ const API_BASE = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3001'
 
 export default function SettingsScreen() {
   const { mode, setMode, autoTrade, setAutoTrade } = useBotStore()
-  const { signOut } = useAuthStore()
   const [switching, setSwitching] = useState(false)
 
   useEffect(() => {
@@ -46,14 +44,9 @@ export default function SettingsScreen() {
                   body: JSON.stringify({ mode: 'live' }),
                 })
                 const data = await res.json()
-                if (data.success) {
-                  setMode('live')
-                } else {
-                  Alert.alert('Error', data.error || 'Failed to switch')
-                }
-              } catch (e: any) {
-                Alert.alert('Error', e.message)
-              }
+                if (data.success) setMode('live')
+                else Alert.alert('Error', data.error || 'Failed to switch')
+              } catch (e: any) { Alert.alert('Error', e.message) }
               setSwitching(false)
             },
           },
@@ -68,14 +61,9 @@ export default function SettingsScreen() {
           body: JSON.stringify({ mode: newMode }),
         })
         const data = await res.json()
-        if (data.success) {
-          setMode(newMode)
-        } else {
-          Alert.alert('Error', data.error || 'Failed to switch')
-        }
-      } catch (e: any) {
-        Alert.alert('Error', e.message)
-      }
+        if (data.success) setMode(newMode)
+        else Alert.alert('Error', data.error || 'Failed to switch')
+      } catch (e: any) { Alert.alert('Error', e.message) }
       setSwitching(false)
     }
   }
@@ -120,9 +108,7 @@ export default function SettingsScreen() {
         <TextInput style={styles.input} placeholder="OKX_PASSPHRASE" placeholderTextColor="#555" secureTextEntry editable={false} />
       </View>
 
-      <TouchableOpacity style={styles.logoutBtn} onPress={signOut}>
-        <Text style={styles.logoutText}>Sign Out</Text>
-      </TouchableOpacity>
+      <Text style={styles.version}>Trading Bot v0.1.0</Text>
     </ScrollView>
   )
 }
@@ -144,6 +130,5 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#1a1a2e', color: '#555', borderRadius: 8, padding: 12, marginBottom: 8, fontSize: 14,
   },
-  logoutBtn: { padding: 14, borderRadius: 8, borderColor: '#ef4444', borderWidth: 1, alignItems: 'center', marginTop: 20 },
-  logoutText: { color: '#ef4444', fontWeight: 'bold' },
+  version: { color: '#444', textAlign: 'center', marginTop: 40, fontSize: 12 },
 })
