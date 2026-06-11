@@ -15,6 +15,11 @@ const PORT = process.env.PORT || 3001
 
 app.use(cors())
 app.use(express.json())
+// Standalone health endpoint (used by Render health check + cron-job)
+app.get('/health', (_req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() })
+})
+
 app.use('/api', routes)
 
 // --- Core services (shared across all modes) ---
